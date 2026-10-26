@@ -1,0 +1,16 @@
+[user]
+	name = Gaurav
+	email = gbhagwaria@gmail.com
+	signingkey = 6DB2EE5F91A6451E02C79DA9C334757F6F4DFF39
+
+[commit]
+	gpgsign = true
+
+[init]
+    defaultBranch = main
+
+[push]
+    autoSetupRemote = true
+
+[core]
+    editor = nvim

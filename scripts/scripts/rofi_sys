@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+ROFI_THEME="$HOME/.config/rofi/launchers/type-1/style-3.rasi"
+
+choice=$(
+    printf "kill\nsuspend\nreboot\nshutdown" |
+    rofi -dmenu \
+        -theme "$ROFI_THEME" \
+        -p "Select action" \
+        -lines 4
+)
+
+case "$choice" in
+    kill)
+        target=$(
+            ps -u "$USER" -o pid,comm,%cpu,%mem --sort=-%cpu |
+            rofi -dmenu \
+                -theme "$ROFI_THEME" \
+                -p "Kill process:" \
+                -lines 10
+        )
+
+        pid=$(awk '{print $1}' <<< "$target")
+        [[ -n "$pid" ]] && kill "$pid"
+        ;;
+    suspend)
+        swaylock --color 000000 & sleep 1 && systemctl suspend
+        ;;
+    reboot)
+        systemctl reboot -i
+        ;;
+    shutdown)
+        shutdown now
+        ;;
+esac

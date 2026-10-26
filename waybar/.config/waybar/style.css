@@ -1,0 +1,407 @@
+/* ~/.config/waybar/style.css
+   Modern floating-island bar + matching island-style menus.
+   Edit the palette below to retheme everything in one place. */
+
+/* ---------- Palette ---------- */
+@define-color surface        #17171a;   /* module islands */
+@define-color surface_hover  #202024;
+@define-color stroke         rgba(255, 255, 255, 0.07);
+@define-color stroke_hover   rgba(255, 255, 255, 0.14);
+@define-color hover_soft     rgba(255, 255, 255, 0.08);   /* one hover tint for small items */
+@define-color surface_press  #26262b;
+@define-color text           #d9d9d9;
+@define-color text_dim       #8e8e93;
+@define-color accent         #3a3a3c;   /* neutral gray active pill */
+@define-color good           #30d158;
+@define-color warn           #ff9f0a;
+@define-color critical       #ff453a;
+
+/* menus / tooltips (same family as the bar islands) */
+@define-color menu_bg        #17171a;
+@define-color menu_border    rgba(255, 255, 255, 0.10);
+@define-color menu_text      #f5f5f7;
+@define-color menu_dim       rgba(245, 245, 247, 0.38);
+@define-color menu_sep       rgba(255, 255, 255, 0.07);
+@define-color menu_hover     rgba(255, 255, 255, 0.08);
+@define-color menu_hover_hi  rgba(255, 255, 255, 0.12);
+@define-color menu_press     rgba(255, 255, 255, 0.16);
+@define-color menu_hover_txt #ffffff;
+
+/* ---------- Base ---------- */
+* {
+    font-family: "Inter", "SF Pro Text", "Noto Sans", "Iosevka", "JetBrains Nerd", "Symbols Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+/* Bar is fully transparent; the modules float as rounded islands */
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+#waybar > box {
+    background: transparent;
+    padding: 0 6px;
+}
+
+/* ---------- Island look (shared) ---------- */
+#workspaces,
+#clock,
+#audio,
+#hardware,
+#battery,
+#language,
+#tray {
+    background-color: @surface;
+    border: 1px solid @stroke;
+    border-radius: 12px;
+    margin: 6px 3px;
+    padding: 0 12px;
+    min-height: 24px;
+    color: @text;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+/* tabular digits so numbers don't jitter */
+#clock,
+#cpu,
+#memory,
+#battery,
+#pulseaudio {
+    font-feature-settings: "tnum";
+}
+
+/* Calmer bar: only the workspaces and clock islands keep a visible outline */
+#audio,
+#hardware,
+#battery,
+#language,
+#tray {
+    border-color: transparent;
+}
+
+/* Hover feedback on clickable islands */
+#clock:hover,
+#audio:hover,
+#hardware:hover,
+#battery:hover,
+#language:hover {
+    background-color: @surface_hover;
+    border-color: @stroke_hover;
+}
+
+/* Pressed feedback */
+#clock:active,
+#audio:active,
+#hardware:active,
+#battery:active,
+#language:active {
+    background-color: @surface_press;
+}
+
+/* ---------- Workspaces ---------- */
+#workspaces {
+    padding: 0 4px;
+}
+
+#workspaces button {
+    color: @text_dim;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    border-radius: 8px;
+    padding: 0 10px;
+    margin: 3px 2px;
+    min-width: 18px;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+#workspaces button:hover {
+    background-color: @hover_soft;
+    background-image: none;
+    color: @text;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    background-color: @accent;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* empty workspaces fade back so occupied ones stand out */
+#workspaces button.empty {
+    opacity: 0.5;
+}
+
+#workspaces button.urgent {
+    background-color: @critical;
+    color: #ffffff;
+}
+
+/* ---------- Clock ---------- */
+#clock {
+    font-weight: 600;
+    padding: 0 16px;
+}
+
+/* ---------- CPU / Memory (inside #hardware) ---------- */
+#cpu,
+#memory {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 6px;
+    color: @text;
+}
+
+#cpu.warning,
+#memory.warning {
+    color: @warn;
+}
+
+#cpu.critical,
+#memory.critical {
+    color: @critical;
+}
+
+/* ---------- Audio / Mic (inside #audio) ---------- */
+#pulseaudio,
+#pulseaudio.microphone {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 6px;
+    color: @text;
+}
+
+#pulseaudio.muted {
+    color: @text_dim;
+}
+
+/* ---------- Battery ---------- */
+#battery {
+    color: @text;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @good;
+}
+
+#battery.warning:not(.charging) {
+    color: @warn;
+    border-color: @warn;
+}
+
+#battery.critical:not(.charging) {
+    color: @critical;
+    border-color: @critical;
+    animation: blink 1.5s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        color: @text;
+        border-color: @critical;
+    }
+}
+
+/* ---------- Keyboard layout ---------- */
+#language {
+    color: @text_dim;
+}
+
+/* ---------- Tray ---------- */
+#tray {
+    padding: 0 6px;
+}
+
+#tray > * {
+    padding: 0 4px;
+    margin: 3px 1px;
+    border-radius: 8px;
+    transition: background-color 150ms ease;
+}
+
+#tray > *:hover {
+    background-color: @hover_soft;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: none;
+    background-color: alpha(@critical, 0.20);
+}
+
+/* =====================================================
+   Island-style dropdowns: tray menus, popups, tooltips
+   Same surface, stroke and radius as the bar islands,
+   with soft glassy hover pills instead of flat blocks.
+   ===================================================== */
+
+/* menu surface: matches the islands, with a faint top sheen */
+menu,
+#tray menu,
+.tray menu {
+    background-color: @menu_bg;
+    background-image: linear-gradient(to bottom,
+                                      rgba(255, 255, 255, 0.04),
+                                      rgba(255, 255, 255, 0.00) 40%);
+    color: @menu_text;
+    border: 1px solid @menu_border;
+    border-radius: 14px;
+    padding: 6px;
+    margin: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* popup window wrapper: invisible so only the rounded menu shows */
+window.popup,
+window.popup decoration,
+window.popup > decoration,
+window.csd,
+window.csd decoration {
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* scroll arrows at menu edges */
+menu arrow.top,
+menu arrow.bottom,
+menu > arrow {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    min-height: 0;
+    color: @menu_dim;
+}
+
+/* rows: roomy rounded pills, outlined on hover like the islands */
+menu menuitem,
+#tray menu menuitem {
+    background-color: transparent;
+    background-image: none;
+    color: @menu_text;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 5px 12px;
+    margin: 1px 0;
+    min-height: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    box-shadow: none;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+menu menuitem label,
+#tray menu menuitem label {
+    color: inherit;
+    font-weight: 500;
+}
+
+/* hover pill: soft glass gradient + hairline stroke */
+menu menuitem:hover,
+#tray menu menuitem:hover {
+    background-color: @menu_hover;
+    background-image: linear-gradient(to bottom, @menu_hover_hi, @menu_hover);
+    border-color: @stroke_hover;
+    color: @menu_hover_txt;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* pressed */
+menu menuitem:active,
+#tray menu menuitem:active {
+    background-color: @menu_press;
+    background-image: none;
+    border-color: @stroke_hover;
+    color: @menu_hover_txt;
+}
+
+/* disabled rows */
+menu menuitem:disabled,
+menu menuitem:disabled label,
+#tray menu menuitem:disabled label {
+    color: @menu_dim;
+}
+
+menu menuitem:disabled:hover,
+#tray menu menuitem:disabled:hover {
+    background-color: transparent;
+    background-image: none;
+    border-color: transparent;
+}
+
+/* icons: dimmed until hovered */
+menu menuitem image {
+    margin-right: 8px;
+    min-height: 0;
+    opacity: 0.65;
+    transition: opacity 140ms ease;
+}
+
+menu menuitem:hover image,
+menu menuitem:active image {
+    opacity: 1;
+}
+
+/* submenu arrows */
+menu menuitem arrow {
+    color: @menu_dim;
+    min-width: 12px;
+}
+
+menu menuitem:hover arrow {
+    color: @menu_text;
+}
+
+/* separators: thin, inset, faded */
+menu separator,
+#tray menu separator {
+    background-color: @menu_sep;
+    background-image: none;
+    min-height: 1px;
+    margin: 5px 12px;
+}
+
+/* check / radio indicators: green accent when on */
+menu check,
+menu radio {
+    border-radius: 4px;
+    background-color: transparent;
+    color: inherit;
+}
+
+menu check:checked,
+menu radio:checked {
+    color: @good;
+}
+
+/* tooltips match the menu */
+tooltip {
+    background-color: @menu_bg;
+    border: 1px solid @menu_border;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+tooltip label {
+    color: @menu_text;
+    padding: 4px 8px;
+    font-weight: 500;
+}

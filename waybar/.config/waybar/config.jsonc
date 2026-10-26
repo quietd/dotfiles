@@ -1,0 +1,104 @@
+// ~/.config/waybar/config
+{
+    "layer": "top",
+    "position": "top",
+    "height": 43,
+    "spacing": 0,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["group/audio", "group/hardware", "battery", "hyprland/language", "tray"],
+
+    // Workspaces shown as plain numbers — only existing/used ones are
+    // rendered, since there's no persistent-workspaces block forcing
+    // a fixed range into view
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "on-click": "activate",
+        "all-outputs": true
+    },
+
+"clock": {
+    "format": "\uf017 {:%I:%M %p}",
+    "format-alt": "\uf133 {:%a %d %b, %Y}",
+    "tooltip-format": "<tt><span size='17pt' weight='bold'>{calendar}</span></tt>",
+    "on-click": "shift",
+    "on-scroll-up": "brightnessctl set 5%+",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "smooth-scrolling-threshold": 1
+},
+    // Speaker + mic grouped into a single visual block
+    "group/audio": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "pulseaudio#microphone"]
+    },
+
+    // CPU + memory grouped into a single visual block
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "memory"]
+    },
+
+    "cpu": {
+        "format": "C - {usage}%",
+        "interval": 2,
+        "tooltip": true
+    },
+
+    "memory": {
+        "format": "M - {percentage}%",
+        "interval": 2,
+        "tooltip-format": "Used: {used:0.1f}G / {total:0.1f}G"
+    },
+
+    // Speaker / output volume
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "\uf466 Muted",
+        "format-icons": {
+            "headphone": "\uf025",
+            "default": ["\uf026", "\uf027", "\uf028"]
+        },
+        "scroll-step": 5,
+        "on-click": "pamixer -t",
+        "on-click-right": "pavucontrol"
+    },
+
+    // Microphone / input volume, separate module instance
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "\uf130 {volume}%",
+        "format-source-muted": "\uf131 Muted",
+        "scroll-step": 5,
+        "on-click": "pamixer --default-source -t",
+        "on-click-right": "pavucontrol"
+    },
+
+    // Battery / charging status
+    "battery": {
+        "interval": 5,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "\uf0e7 {capacity}%",
+        "format-plugged": "\uf1e6 {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"]
+    },
+
+    // Current keyboard layout. If you have multiple keyboards attached,
+    // uncomment "keyboard-name" and set it to the device name from
+    // `hyprctl devices` (under "keyboard" entries)
+    "hyprland/language": {
+    "format": "\uf11c {shortDescription} {variant}",
+    "on-click": "hyprctl switchxkblayout all next"
+    },
+
+    // System tray — holds icons/applets for running background apps
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    }
+}
