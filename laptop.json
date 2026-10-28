@@ -38,14 +38,32 @@
             "threshold": -10.0,
             "wet": 0.0
         },
+        "deesser#0": {
+            "bypass": false,
+            "detection": "RMS",
+            "f1-freq": 6000.0,
+            "f1-level": 0.0,
+            "f2-freq": 4500.0,
+            "f2-level": 12.0,
+            "f2-q": 1.0,
+            "input-gain": 0.0,
+            "laxity": 15,
+            "makeup": 0.0,
+            "mode": "Wide",
+            "output-gain": 0.0,
+            "ratio": 3.0,
+            "sc-listen": false,
+            "threshold": -20.0
+        },
         "equalizer#0": {
             "balance": 0.0,
             "bypass": false,
-            "input-gain": 0.0,
+            "decramp": "x8",
+            "input-gain": -10.0,
             "left": {
                 "band0": {
                     "frequency": 32.0,
-                    "gain": 3.5,
+                    "gain": 0.3100000000000023,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -56,7 +74,7 @@
                 },
                 "band1": {
                     "frequency": 64.0,
-                    "gain": 2.0,
+                    "gain": 9.25,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -67,7 +85,7 @@
                 },
                 "band2": {
                     "frequency": 128.0,
-                    "gain": 1.0,
+                    "gain": 8.579999999999998,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -89,7 +107,7 @@
                 },
                 "band4": {
                     "frequency": 512.0,
-                    "gain": -0.5,
+                    "gain": -7.259999999999998,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -122,7 +140,7 @@
                 },
                 "band7": {
                     "frequency": 4096.0,
-                    "gain": 1.25,
+                    "gain": 2.9200000000000017,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -133,7 +151,7 @@
                 },
                 "band8": {
                     "frequency": 8192.0,
-                    "gain": 2.75,
+                    "gain": 6.43,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -156,13 +174,13 @@
             },
             "mode": "IIR",
             "num-bands": 10,
-            "output-gain": 0.0,
+            "output-gain": 4.5,
             "pitch-left": 0.0,
             "pitch-right": 0.0,
             "right": {
                 "band0": {
                     "frequency": 32.0,
-                    "gain": 3.5,
+                    "gain": 0.3100000000000023,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -173,7 +191,7 @@
                 },
                 "band1": {
                     "frequency": 64.0,
-                    "gain": 2.0,
+                    "gain": 9.25,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -184,7 +202,7 @@
                 },
                 "band2": {
                     "frequency": 128.0,
-                    "gain": 1.0,
+                    "gain": 8.579999999999998,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -206,7 +224,7 @@
                 },
                 "band4": {
                     "frequency": 512.0,
-                    "gain": -0.5,
+                    "gain": -7.259999999999998,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -239,7 +257,7 @@
                 },
                 "band7": {
                     "frequency": 4096.0,
-                    "gain": 1.25,
+                    "gain": 2.9200000000000017,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -250,7 +268,7 @@
                 },
                 "band8": {
                     "frequency": 8192.0,
-                    "gain": 2.75,
+                    "gain": 6.43,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 1.6,
@@ -579,6 +597,7 @@
             "compressor#0",
             "multiband_compressor#0",
             "equalizer#0",
+            "deesser#0",
             "limiter#0"
         ]
     }
