@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Directories to search
-SEARCH_DIRS=(~/projects ~/tests ~/data ~/dotfiles)
+SEARCH_DIRS=(~/projects ~/tests ~/data ~/dotfiles_new)
 NOTE_DIR=~/notes
 
 if [[ $# -eq 1 ]]; then
