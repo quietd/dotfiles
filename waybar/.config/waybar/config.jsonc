@@ -7,7 +7,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["group/audio", "group/hardware", "battery", "hyprland/language", "tray"],
+    "modules-right": ["group/audio", "group/hardware", "battery", "group/lang", "tray"],
 
     // Workspaces shown as plain numbers — only existing/used ones are
     // rendered, since there's no persistent-workspaces block forcing
@@ -91,6 +91,22 @@
     // Current keyboard layout. If you have multiple keyboards attached,
     // uncomment "keyboard-name" and set it to the device name from
     // `hyprctl devices` (under "keyboard" entries)
+    "group/lang": {
+        "orientation": "horizontal",
+        "modules": ["hyprland/language", "keyboard-state"]
+    },
+
+    // Caps lock indicator (shown inside group/lang)
+    // NOTE: locked/unlocked are swapped on purpose, since this module reports caps state inverted
+    "keyboard-state": {
+        "capslock": true,
+        "format": "{icon}",
+        "format-icons": {
+            "locked": "",      // reported "locked" = caps actually OFF, so show nothing
+            "unlocked": "CAPS" // reported "unlocked" = caps actually ON, so show the label
+        }
+    },
+
     "hyprland/language": {
     "format": "\uf11c {shortDescription} {variant}",
     "on-click": "hyprctl switchxkblayout all next"
