@@ -58,6 +58,7 @@ keyd
 kicad
 kitty
 lazygit
+legacy-launcher
 lib32-nvidia-utils
 lib32-vulkan-radeon
 libc++
@@ -146,6 +147,7 @@ tree
 ttc-iosevka
 ttf-jetbrains-mono-nerd
 ttf-ms-fonts
+ttf-nerd-fonts-symbols-mono
 ttf-nunito
 ueberzugpp
 unrar
