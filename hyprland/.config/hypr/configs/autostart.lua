@@ -6,5 +6,6 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("wl-gammarelay")
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
   hl.exec_cmd("wl-paste --type image --watch cliphist store")
+  hl.exec_cmd("qs -p ~/.config/quickshell/calendar/shell.qml")
 end)
 
