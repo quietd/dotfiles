@@ -15,8 +15,8 @@ PanelWindow {
     }
 
     margins {
-        top: 60
-        right: 18
+        top: 70
+        right: 70
     }
 
     // Keep it above wallpaper, below normal windows
